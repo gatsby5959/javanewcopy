@@ -1,5 +1,7 @@
 package new02;
 
+import java.util.Calendar;
+
 public class singletonCount {
 
    public static void main(String[] args) {
@@ -16,6 +18,10 @@ public class singletonCount {
 	   System.out.println(c2.countMethod()); //4
 	   System.out.println(c2.countMethod()); //5
 	   System.out.println(c2.countMethod()); //6
+	   
+	   Calendar c = Calendar.getInstance(); // getInstance()로 이렇게 불러오면 싱글톤이네? 라고 생각하면됨 
+	   int year = c.get(Calendar.YEAR);
+	   System.out.println(year);
 
    }
 

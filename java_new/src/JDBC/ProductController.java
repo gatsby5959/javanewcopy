@@ -35,7 +35,7 @@ public class ProductController {
 				break;
 			case 3: detail();
 				break;
-			case 4: medify();
+			case 4: modify();
 				break;
 			case 5: remove();
 				break;
@@ -47,13 +47,43 @@ public class ProductController {
 		
 	}
 
+	/*
+	 * select 리턴이 있음. Product 객체 리턴
+	 * insert(등록), update(수정), delete(삭제)
+	 * 리턴은 
+	 */
 	private void remove() {
-		// TODO Auto-generated method stub
-		
+		// 상품삭제
+		System.out.println("상품번호>>");
+		int pno = scan.nextInt();
+		int isOk = svc.delete(pno);
+		System.out.println("상품등록 "+  ((isOk > 0)? "성공":"실패") );
 	}
 
-	private void medify() {
+	private void modify() {
 		// TODO Auto-generated method stub
+		// pno에 해당하는 객체를 수정(pname, price, madeby)
+		System.out.println("수정하려는 번호 >>");
+		// 상품수정용
+		int pno = scan.nextInt();
+		System.out.println("상품이름>>");
+		scan.nextLine(); //위쪽 공백처리
+		String pname = scan.nextLine();
+		System.out.println("상품가격>>");
+		int price = scan.nextInt();
+		System.out.println("상품상세내역madeby>>");
+		scan.nextLine(); //위쪽 공백처리
+		String madeby = scan.nextLine();
+		
+		
+		Product p = new Product(pno,pname, price, madeby);
+		//서비스에게 수정을 요청하는 메서드 작성
+		int isOk = svc.update(p);
+		//isOk는 디비에서 Insert될때 리턴해 주는 값
+		//잘되면 1을 리턴 안되면 0리턴
+		System.out.println("상품등록 "+  ((isOk > 0)? "성공":"실패") );
+		
+
 		
 	}
 
@@ -76,10 +106,12 @@ public class ProductController {
 		}		
 	}
 
+	
 	private void register() {
 		// 상품등록
 		System.out.println("상품이름>>");
-		String pname = scan.next();
+		scan.nextLine(); //위쪽 공백처리
+		String pname = scan.nextLine();
 		System.out.println("상품가격>>");
 		int price = scan.nextInt();
 		System.out.println("상품상세내역>>");
@@ -93,8 +125,10 @@ public class ProductController {
 		System.out.println("상품등록 "+  ((isOk > 0)? "성공":"실패") );
 	}
 	
+	
+	
+	
 } //class
-
 
 
 

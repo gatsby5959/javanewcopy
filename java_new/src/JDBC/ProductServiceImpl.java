@@ -32,4 +32,18 @@ public class ProductServiceImpl implements Service {
 		return dao.selectOne(pno);
 	}
 
+	@Override
+	public int update(Product p) {
+		// TODO Auto-generated method stub
+		System.out.println("update_service success!!");
+		return dao.update(p);
+	}
+
+	@Override
+	public int delete(int pno) {
+		// TODO Auto-generated method stub
+		System.out.println("delete_service success!!");
+		return dao.delete(pno);
+	}
+
 }

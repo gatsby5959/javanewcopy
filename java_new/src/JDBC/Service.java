@@ -10,4 +10,8 @@ public interface Service {
 
 	Product detail(int pno);
 
+	int update(Product p);
+
+	int delete(int pno);
+
 }

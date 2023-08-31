@@ -11,6 +11,12 @@ public class Product {
 	//생성자
 	public Product() {}
 	
+	
+	//상품삭제할떄 써양할듯 -> pno
+	public Product(int pno) {
+		this.pno = pno;
+	}	
+	
 	//상품등록 -> pname, price, madeby
 	public Product(String pname, int price, String madeby) {
 		this.pname = pname;

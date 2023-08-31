@@ -33,6 +33,7 @@ public class ProductDAOImpl implements DAO {
 			pst.setString(1, p.getPname());
 			pst.setInt(2, p.getPrice());
 			pst.setString(3, p.getMadeby());
+			
 			//insert, update, delete => executeUpdate() return int   //0개 1개 2개 이런 느낌
 			return pst.executeUpdate();
 			//
@@ -57,7 +58,9 @@ public class ProductDAOImpl implements DAO {
 						new Product(			
 									rs.getInt("pno"),
 									rs.getString("pname"),
-									rs.getInt("price")
+									rs.getInt("price"),
+									rs.getString("regdate"), //230831추가
+									rs.getString("madeby")//230831추가
 									)
 						);
 			}
@@ -91,6 +94,48 @@ public class ProductDAOImpl implements DAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public int update(Product p) {
+		// TODO Auto-generated method stub
+		System.out.println("update_DAO success!!");
+
+		query  = "UPDATE product SET pname=?, price=?, madeby=?, regdate=now()"
+				+ " WHERE pno = ?";
+		try { //디비연결을 위해 try catch 만듬
+			pst = conn.prepareStatement(query);
+	
+			pst.setString(1, p.getPname());
+			pst.setInt(2, p.getPrice());
+			pst.setString(3, p.getMadeby());
+			pst.setInt(4, p.getPno());
+			return pst.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println("Conn연결 오류 SQL구문 에러");
+			System.out.println("update Error!!");
+			e.printStackTrace();
+		}
+			return 0;
+		
+	}
+
+	@Override
+	public int delete(int pno) {
+		// TODO Auto-generated method stub
+
+		System.out.println("delete_DAO success!!");
+		query = "DELETE FROM product WHERE pno = ?";
+		try {
+			pst=conn.prepareStatement(query); //쿼리 받아오기 
+			pst.setInt(1, pno);
+			return pst.executeUpdate(); //아마도 키값이니 1개만 나올것임
+
+		} catch(SQLException e) {
+			System.out.println("delete Error!!");
+			e.printStackTrace();
+		} 
+		return 0;
 	}
 
 } //class
